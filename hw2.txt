@@ -1,0 +1,29 @@
+1. How many different subnets are there?
+    A: There are 5 different subnets.
+    Script: sort -b -u -k2,2 network.log | wc -l
+
+2. How many different source computers are there?
+    A: There are 50 different source computers.
+    Script: sort -b -n -u -k4,4 network.log | wc -l
+
+3. How many different destination computers are there?
+    A: There are 50 different destination computers.
+    Script: sort -b -n -u -k6,6 network.log | wc -l
+
+4. Which of the subnets has the most communication?
+    A: Porket has the most communication (26109 communications).
+    Script: awk '{print $2}' network.log | sort | uniq -c | sort -rn
+
+5. Which of the source computers has the most communication?
+    A: Source computer 105.6.103.3 has the most communication (2723 communications).
+    Script: awk '{print $4}' network.log | sort | uniq -c | sort -rn
+
+6. Which of the destination computers has the most communication?
+    A: Destination computer 105.6.103.3 has the most communication (2724 communications).
+    Script: awk '{print $6}' network.log | sort | uniq -c | sort -rn
+
+7. Which of the destination computers has communicated with the most source computers?
+    A: Each destination computer has communicated with nine source computers.
+    Script: sort -n -u -k6,6 -k4,4 -s network.log | awk '{print $6}' | sort -n | uniq -c| awk '{print $1}' | sort -n | uniq -c
+
+
