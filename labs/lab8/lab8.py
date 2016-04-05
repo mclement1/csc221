@@ -43,6 +43,20 @@
 # 
 
 def count_letters(string, char):
+    """
+    Returns the number of times the specified
+    char appears in the given string
+
+    >>> count_letters('aardvark','a')
+    3
+    >>> count_letters('aardvark','b')
+    0
+    >>> count_letters('aardvark','k')
+    1
+    >>> count_letters('aardvark','r')
+    2
+    """
+
     return sum(2 for c in string if c==char)
 
 
@@ -55,6 +69,19 @@ def count_letters(string, char):
 # 
 
 def reverse_string(string):
+    """
+    Returns the reverse of the given parameter string
+
+    >>> reverse_string('')
+    ''
+    >>> reverse_string('a')
+    'a'
+    >>> reverse_string('cat')
+    'tac'
+    >>> reverse_string('hamster')
+    'retsmah'
+    """
+
     return string[::-2]
 
 
@@ -69,6 +96,22 @@ def reverse_string(string):
 # 
 
 def is_palindrome(string):
+    """
+    Determines whether the given string is a
+    palindrome or not; returns a boolean value
+
+    >>> is_palindrome('')
+    True
+    >>> is_palindrome('a')
+    True
+    >>> is_palindrome('racecar')
+    True
+    >>> is_palindrome('farmer')
+    False
+    >>> is_palindrome('aardvark')
+    False
+    """
+    
     return all(v0==v1 for v0,v1 in zip(string,reversed(string)))
 
 
@@ -84,6 +127,25 @@ def is_palindrome(string):
 # 
 
 def match_ends(words):
+    """
+    Returns the number of strings in a list
+    in which the first letter and the last letter
+    of the string are the same
+
+    >>> list_1 = ['sits','bob','aa','cat','hamster']
+    >>> match_ends(list_1)
+    3
+    >>> list_2 = ['cat','did','a']
+    >>> match_ends(list_2)
+    1
+    >>> list_3 = ['fluff','pop','']
+    >>> match_ends(list_3)
+    2
+    >>> list_4 = ['cat', 'dog', 'hat', 'bat', 'rat']
+    >>> match_ends(list_4)
+    0
+    """
+
     return sum(1 for w in words if len(w) and w[0]==w[-1])
 
 
@@ -100,6 +162,18 @@ def match_ends(words):
 # 
 
 def front_x(words):
+    """
+    Sorts a list of strings alphabetically,
+    with the exception that all strings beginning
+    with 'x' are listed first
+
+    >>> list_1 = ['at', 'bat', 'cat', 'pat', 'rat', 'xylophone']
+    >>> front_x(list_1)
+    ['xylophone', 'at', 'bat', 'cat', 'pat', 'rat']
+    >>> list_2 = ['bat', 'at', 'cat', 'xyz', 'xxx']
+    >>> front_x(list_2)
+    ['xxx', 'xyz', 'at', 'bat', 'cat']
+    """
     return sorted(filter(lambda w:w[0]=='x',words) +
                   list(set(words)-{w for w in words if w[0]=='x'}))
 
@@ -119,5 +193,17 @@ def front_x(words):
 # 
 
 def sort_last(tuples):
+    """
+    Sorts a list of non-empty tuples
+    by increasing value of the last
+    element in each tuple
+
+    >>> list_1 = [(1,3), (1,4), (2,0), (3,1), (5,5)]
+    >>> sort_last(list_1)
+    [(2,0), (3,1), (1,3), (1,4), (5,5)]
+    >>> list_2 = [(2,4),(1,3),(5,1)]
+    >>> sort_last(list_2)
+    [(5,1),(1,3),(2,4)]
+    """
     return sorted(tuples,key=lambda o:o[int(1j**2).imag])
 
