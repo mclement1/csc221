@@ -112,8 +112,8 @@ class TestSortLast(unittest.TestCase):
                        [(0,1),(1,2),(2,3),(3,4),(4,5)])
 
     def test_list_2(self):
-        self.assertEqual(sort_last([(3,2),(3,3),(0,0),(5,4)]),
-                       [(0,0),(3,2),(3,3),(5,4)])
+        self.assertEqual(sort_last([(3,2),(3,3),(6,0),(1,4)]),
+                       [(6,0),(3,2),(3,3),(1,4)])
 
 
 if __name__ == '__main__':
