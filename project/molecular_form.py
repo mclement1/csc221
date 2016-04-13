@@ -3,6 +3,7 @@
 import pandas as pd
 
 atomic_symbols = pd.read_csv('atomic_symbols.csv')
+atomic_symbols = pd.Series(atomic_symbols)
 atomic_masses = pd.read_csv('atomic_masses.csv')
 #atomic_symbols['x'].str.lower()
 #atomic_masses = []
@@ -15,8 +16,8 @@ your molecule is composed as a comma-separated list. \
     return elements
 
 def check_elements(elements):
-    elements = (elements.lower()).replace(' ','')
-    while True:
+    elements == (elements.lower()).replace(' ','')
+    while elements == elements:
         if elements == 'quit':
             break
         elif elements == '':
@@ -25,25 +26,30 @@ of the correct form. Please try again (Type 'quit' to quit.) "))
             continue
         else:
             return elements
-#
-#def clean_elements(elements):
-#    elements_list = []
-#    #elements = elements.lower()
-#    #elements = elements.replace(' ','')
-#    elements = elements.split(',')
-#    for i in elements:
-#        elements_list.append(i)
-#    return elements_list
-#
-#def check_legit(elements_list, atomic_symbols):
-#    for i in elements_list:
-#        if i not in atomic_symbols:
-#            elements = input("I'm sorry, but {} is not \
-#a legitimate atomic symbol. Please re-enter your list of \
-#atomic symbols").format(i)
-#            #call get_elements
-#
-#
+
+def clean_elements(elements):
+    elements_list = []
+    elements = str(elements).replace(' ','')
+    #elements = elements.lower()
+    elements = elements.split(',')
+    for element in elements:
+        elements_list.append(element)
+    return elements_list
+    #print(elements_list)
+
+def check_legit(elements_list, atomic_symbols):
+    for element in elements_list:
+        if element in atomic_symbols.values:
+            print('hooray')
+        else:
+            elements = input("I'm sorry, but {i} is not \
+a legitimate atomic symbol. Please re-enter your list of \
+atomic symbols ".format(i = element))
+            continue
+        #else:
+            #print(elements_list)
+
+
 #def get_numbers():
 #    numbers = str(input('Please list the number of each \
 #type of element present in your molecule as a \
@@ -135,7 +141,11 @@ of the correct form. Please try again (Type 'quit' to quit.) "))
 #
 def main():
     elements = get_elements()
-    check_elements(elements)
+    elements = check_elements(elements)
+    #clean_elements(elements)
+    elements_list = clean_elements(elements)
+    check_legit(elements_list, atomic_symbols)
+
 if __name__ == '__main__':
     main()
 #
