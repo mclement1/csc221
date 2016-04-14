@@ -1,31 +1,60 @@
 #!/usr/bin/env python3.4
 
-import pandas as pd
+#import pandas as pd
+#from atomic_symbols import atomic_symbols
 
-atomic_symbols = pd.read_csv('atomic_symbols.csv')
-atomic_symbols = pd.Series(atomic_symbols)
-atomic_masses = pd.read_csv('atomic_masses.csv')
+#atomic_symbols = pd.read_csv('atomic_symbols.csv')
+#atomic_symbols = pd.Series(atomic_symbols)
+#atomic_masses = pd.read_csv('atomic_masses.csv')
 #atomic_symbols['x'].str.lower()
 #atomic_masses = []
-#print(atomic_symbols) 
+#print(atomic_symbols)
+
+atomic_symbols = ('H','He','Li','Be','B','C','N','O','F','Ne','Na','Mg','Al',
+'Si','P','S','Cl','Ar','K','Ca','Sc','Ti','V','Cr','Mn','Fe','Co','Ni','Cu',
+'Zn','Ga','Ge','As','Se','Br','Kr','Rb','Sr','Y','Zr','Nb','Mo','Tc','Ru','Rh',
+'Pd','Ag','Cd','In','Sn','Sb','Te','I','Xe','Cs','Ba','La','Ce','Pr','Nd','Pm',
+'Sm','Eu','Gd','Tb','Dy','Ho','Er','Tm','Yb','Lu','Hf','Ta','W','Re','Os','Ir',
+'Pt','Au','Hg','Tl','Pb','Bi','Po','At','Rn','Fr','Ra','Ac','Th','Pa','U','Np',
+'Pu','Am','Cm','Bk','Cf','Es','Fm','Md','No','Lr','Rf','Db','Sg','Bh','Hs',
+'Mt','Ds','Rg','Cn',)
 
 def get_elements():
     elements = str(input('Please list the elements of which \
 your molecule is composed as a comma-separated list. \
 [ex: for water, type "H,O"] Type "quit" to quit. '))
-    return elements
-
-def check_elements(elements):
-    elements == (elements.lower()).replace(' ','')
-    while elements == elements:
-        if elements == 'quit':
-            break
-        elif elements == '':
-            elements = str(input("I'm sorry, but your input was not \
+    while elements == '':
+         elements = str(input("I'm sorry, but your input was not \
 of the correct form. Please try again (Type 'quit' to quit.) "))
-            continue
+    while elements != '':
+        if elements == 'quit':
+            #return elements
+            break
         else:
+            #print(elements)
+            #return elements
+            clean_elements(elements)
             return elements
+#def check_elements(elements):
+    #elements == (elements.lower()).replace(' ','')
+    #while elements == '':
+        #elements = str(input("I'm sorry, but your input was not \
+#of the correct form. Please try again (Type 'quit' to quit.) "))
+        #continue
+        #while True:
+    #while elements == elements:
+    #while elements != '':
+        #if elements == 'quit':
+            #break
+        #break
+        #elif elements == '':
+            #elements = str(input("I'm sorry, but your input was not \
+#of the correct form. Please try again (Type 'quit' to quit.) "))
+            #continue
+        #else:
+            #print(elements)
+            #return elements
+    #return elements
 
 def clean_elements(elements):
     elements_list = []
@@ -34,20 +63,21 @@ def clean_elements(elements):
     elements = elements.split(',')
     for element in elements:
         elements_list.append(element)
+    print(elements_list)
     return elements_list
-    #print(elements_list)
 
 def check_legit(elements_list, atomic_symbols):
     for element in elements_list:
-        if element in atomic_symbols.values:
-            print('hooray')
+        #print('hooray')
+        if element in atomic_symbols:
+           print('hooray')
         else:
             elements = input("I'm sorry, but {i} is not \
 a legitimate atomic symbol. Please re-enter your list of \
 atomic symbols ".format(i = element))
             continue
         #else:
-            #print(elements_list)
+            #print(atomic_symbols.values)
 
 
 #def get_numbers():
@@ -105,17 +135,17 @@ atomic symbols ".format(i = element))
 #
 ##def get_elements():
 #    #elements_list = []
-#    
+#
 #    #elements = str(input('Please list the elements of which \
 ##your molecule is composed as a comma-separated list. \
 ##[ex: for water, type "H,O"] Type "quit" to quit. '))
-#    
-#    
+#
+#
 #    #while elements == '':
 #        #elements = str(input("I'm sorry, but your input was not \
 ##of the correct form. Please try again (Type 'quit' to quit.) "))
 #
-#        
+#
 #    #while elements != '':
 #
 #        #if elements.lower() == 'quit':
@@ -127,7 +157,7 @@ atomic symbols ".format(i = element))
 #            #elements = elements.split(',')
 #            #for i in elements:
 #                #elements_list.append(i)
-#        
+#
 #        #print(elements_list)
 #        #break
 #    #return elements_list
@@ -137,16 +167,19 @@ atomic symbols ".format(i = element))
 #    #print(passed_list)
 #
 #
-#    
+#
 #
 def main():
+    #get_elements()
     elements = get_elements()
-    elements = check_elements(elements)
+    #check_elements(elements)
+    #while elements == 'quit':
+        #break
     #clean_elements(elements)
-    elements_list = clean_elements(elements)
-    check_legit(elements_list, atomic_symbols)
+    #elements_list = clean_elements(elements)
+    #check_legit(elements_list, atomic_symbols)
 
 if __name__ == '__main__':
     main()
 #
-#    
+#
