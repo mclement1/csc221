@@ -21,11 +21,11 @@ answer to standard out.
     to be converted.
 
     -The program shall be able to recognize when the user input is the
-    empty string, at which point it will prompt the user to re-enter his
+    empty string, at which point it shall prompt the user to re-enter his
     data.
 
     -The program shall be able to recognize when the user input is the
-    word 'quit', at which point it will exit the program.
+    word 'quit', at which point it shall exit the program.
 
 2. Perform calculations:
 
