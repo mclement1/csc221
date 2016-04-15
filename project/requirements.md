@@ -10,7 +10,7 @@ answer to standard out.
     parse this list, and determine whether the input consists of
     legitimate atomic symbols.
 
-    -The program shall be able to accept a list of numberical values
+    -The program shall be able to accept a list of numerical values
     relating to the atomic symbols entered previously, parse this list,
     and confirm that the same number of atomic symbols as numerical
     values were entered by the user.
