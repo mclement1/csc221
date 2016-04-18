@@ -1,6 +1,5 @@
 #!/usr/bin/env python3.4
 
-#import pandas as pd
 import sys
 
 atomic_symbols = ('H','He','Li','Be','B','C','N','O','F','Ne','Na','Mg','Al',
@@ -50,15 +49,15 @@ def validate_elements(elements):
         else:
             return True
          
-def decision(bool_value,elements):
-    if bool_value == False:
-        if elements == 'quit':
-            sys.exit()
+#def decision(bool_value,elements):
+    #if bool_value == False:
+        #if elements == 'quit':
+            #sys.exit()
         
-        elif elements == '':
-            pass
-    else:
-        return elements
+        #elif elements == '':
+            #pass
+    #else:
+        #return elements
 
 def list_elements(elements):
     elements_list = []
@@ -82,6 +81,15 @@ def check_legit(elements_list, atomic_symbols):
             #elements = clean_elements(elements)
             #elements = check_legit(elements,atomic_symbols)
             #break
+
+def handle_bad_input(elements):
+    if elements == 'quit':
+        sys.exit()
+
+    else:
+        get_elements()
+
+
 
 def get_numbers():
     numbers = str(input('Please list the number of each type of element \
@@ -107,15 +115,15 @@ def validate_numbers(numbers):
         else:
             return True
          
-def decision(bool_value,numbers):
-    if bool_value == False:
-        if numbers == 'quit':
-            sys.exit()
+#def decision(bool_value,numbers):
+    #if bool_value == False:
+        #if numbers == 'quit':
+            #sys.exit()
         
-        elif numbers == '':
-            pass
-    else:
-        return numbers
+        #elif numbers == '':
+            #pass
+    #else:
+        #return numbers
 
 def list_numbers(numbers):
     numbers_list = []
@@ -133,23 +141,36 @@ def comp_lists(elements_list, numbers_list):
         return False
 
 
+def handle_bad_num(numbers):
+    if numbers == 'quit':
+        sys.exit()
+
+    else:
+        get_numbers
+
 
 def main():
-    while True:
-        elements = get_elements()
-        elements = format_elements(elements)
-        bool_value = validate_elements(elements)
-        elements = decision(bool_value,elements)
-        elements_list = list_elements(elements)
-        check_legit(elements_list, atomic_symbols)
-        numbers = get_numbers()
-        numbers = format_numbers(numbers)
-        bool_value_num = validate_numbers(numbers)
-        numbers = decision(bool_value_num, numbers)
+    elements = get_elements()
+    elements = format_elements(elements)
+    bool_value = validate_elements(elements)
+    #elements = decision(bool_value,elements)
+    #while bool_value == True:
+        #elements_list = list_elements(elements)
+        #check_legit(elements_list, atomic_symbols)
+    #handle_bad_input(elements)
+    #continue
+    #elements = get_elements()
+
+    #while True:
+    numbers = get_numbers()
+    numbers = format_numbers(numbers)
+    bool_value_num = validate_numbers(numbers)
+    #numbers = decision(bool_value_num, numbers)
+    while bool_value_num == True:
         numbers_list = list_numbers(numbers)
         comp_lists(elements_list, numbers_list)
-
-
+    handle_bad_num(numbers)
+    #numbers = get_numbers()
 
 if __name__ == '__main__':
     main()
