@@ -43,21 +43,12 @@ def format_elements(elements):
 
 
 def validate_elements(elements):
-        if elements == 'quit' or '':
+        if elements == 'quit' or elements == '':
             return False
         
         else:
             return True
          
-#def decision(bool_value,elements):
-    #if bool_value == False:
-        #if elements == 'quit':
-            #sys.exit()
-        
-        #elif elements == '':
-            #pass
-    #else:
-        #return elements
 
 def list_elements(elements):
     elements_list = []
@@ -70,24 +61,16 @@ def check_legit(elements_list, atomic_symbols):
     for element in elements_list:
         if element in atomic_symbols:
             return True
-            #continue
 
         else:
             return False
-            #elements = input("I'm sorry, but {i} is not \
-#a legitimate atomic symbol. Please re-enter your list of \
-#atomic symbols ".format(i = element))
-            #elements = check_elements(elements)
-            #elements = clean_elements(elements)
-            #elements = check_legit(elements,atomic_symbols)
-            #break
 
-def handle_bad_input(elements):
-    if elements == 'quit':
-        sys.exit()
+#def handle_bad_input(elements):
+    #if elements == 'quit':
+        #sys.exit()
 
-    else:
-        get_elements()
+    #else:
+        #get_elements()
 
 
 
@@ -109,21 +92,12 @@ def format_numbers(numbers):
 
 
 def validate_numbers(numbers):
-        if numbers == 'quit' or '':
+        if numbers == 'quit' or numbers == '':
             return False
         
         else:
             return True
          
-#def decision(bool_value,numbers):
-    #if bool_value == False:
-        #if numbers == 'quit':
-            #sys.exit()
-        
-        #elif numbers == '':
-            #pass
-    #else:
-        #return numbers
 
 def list_numbers(numbers):
     numbers_list = []
@@ -141,36 +115,50 @@ def comp_lists(elements_list, numbers_list):
         return False
 
 
-def handle_bad_num(numbers):
-    if numbers == 'quit':
-        sys.exit()
+#def handle_bad_num(numbers):
+    #if numbers == 'quit':
+        #sys.exit()
 
-    else:
-        get_numbers
+    #else:
+        #get_numbers
 
 
-def main():
+def main_elements():
     elements = get_elements()
     elements = format_elements(elements)
     bool_value = validate_elements(elements)
-    #elements = decision(bool_value,elements)
-    #while bool_value == True:
-        #elements_list = list_elements(elements)
-        #check_legit(elements_list, atomic_symbols)
-    #handle_bad_input(elements)
-    #continue
-    #elements = get_elements()
+    while bool_value == False:
+        if elements == 'quit':
+            sys.exit()
+        else:
+            elements = format_elements(get_elements())
+            bool_value = validate_elements(elements)
+    elements_list = list_elements(elements)
+    return elements_list
+    #print(elements_list)
 
-    #while True:
+
+def main_numbers():
     numbers = get_numbers()
     numbers = format_numbers(numbers)
     bool_value_num = validate_numbers(numbers)
-    #numbers = decision(bool_value_num, numbers)
-    while bool_value_num == True:
-        numbers_list = list_numbers(numbers)
-        comp_lists(elements_list, numbers_list)
-    handle_bad_num(numbers)
-    #numbers = get_numbers()
+    while bool_value_num == False:
+        if numbers == 'quit':
+            sys.exit()
+        else:
+            numbers = format_numbers(get_numbers())
+            bool_value_num = validate_numbers(numbers)
+    numbers_list = list_numbers(numbers)
+    return numbers_list
+    #print(numbers_list)
+
+
+
+
+
+def main():
+    main_elements()
+    main_numbers()
 
 if __name__ == '__main__':
     main()
@@ -334,3 +322,35 @@ if __name__ == '__main__':
         #number = int(number)
         #numbers_list.append(number)
     #return numbers_list
+
+    
+#def decision(bool_value,elements):
+    #if bool_value == False:
+        #if elements == 'quit':
+            #sys.exit()
+        
+        #elif elements == '':
+            #pass
+    #else:
+        #return elements
+
+
+            #elements = input("I'm sorry, but {i} is not \
+#a legitimate atomic symbol. Please re-enter your list of \
+#atomic symbols ".format(i = element))
+            #elements = check_elements(elements)
+            #elements = clean_elements(elements)
+            #elements = check_legit(elements,atomic_symbols)
+            #break
+
+
+#def decision(bool_value,numbers):
+    #if bool_value == False:
+        #if numbers == 'quit':
+            #sys.exit()
+        
+        #elif numbers == '':
+            #pass
+    #else:
+        #return numbers
+
