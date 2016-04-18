@@ -2,8 +2,6 @@
 
 #import pandas as pd
 import sys
-#atomic_masses = []
-#print(atomic_symbols)
 
 atomic_symbols = ('H','He','Li','Be','B','C','N','O','F','Ne','Na','Mg','Al',
 'Si','P','S','Cl','Ar','K','Ca','Sc','Ti','V','Cr','Mn','Fe','Co','Ni','Cu',
@@ -37,50 +35,53 @@ def get_elements():
     elements = str(input('Please list the elements of which \
 your molecule is composed as a comma-separated list. \
 [ex: for water, type "H,O"] Type "quit" to quit. '))
-    #elements = elements.replace(' ','')
+    return elements
+
+
+def format_elements(elements):
     elements = (elements.lower()).replace(' ','')
     return elements
 
-def check_elements(elements):
-    while True:
-        if elements == 'quit':
-            sys.exit()
 
-        elif elements == '':
-            elements = str(input("I'm sorry, but your input was not \
-of the correct form. Please try again (Type 'quit' to quit.) "))
-            continue
+def validate_elements(elements):
+        if elements == 'quit' or '':
+            return False
         
         else:
-            return elements
+            return True
          
-       
+def decision(bool_value,elements):
+    if bool_value == False:
+        if elements == 'quit':
+            sys.exit()
+        
+        elif elements == '':
+            pass
+    else:
+        return elements
 
-def clean_elements(elements):
+def list_elements(elements):
     elements_list = []
-    #elements = str(elements).replace(' ','')
     elements = elements.split(',')
     for element in elements:
         elements_list.append(element)
-    #print(elements_list)
     return elements_list
 
 def check_legit(elements_list, atomic_symbols):
     for element in elements_list:
-        #print('hooray')
-        if element.lower() in atomic_symbols:
-            continue
-            print('hooray')
-        #while element not in atomic_symbols:
+        if element in atomic_symbols:
+            return True
+            #continue
 
         else:
-            elements = input("I'm sorry, but {i} is not \
-a legitimate atomic symbol. Please re-enter your list of \
-atomic symbols ".format(i = element))
-            elements = check_elements(elements)
-            elements = clean_elements(elements)
-            elements = check_legit(elements,atomic_symbols)
-            break
+            return False
+            #elements = input("I'm sorry, but {i} is not \
+#a legitimate atomic symbol. Please re-enter your list of \
+#atomic symbols ".format(i = element))
+            #elements = check_elements(elements)
+            #elements = clean_elements(elements)
+            #elements = check_legit(elements,atomic_symbols)
+            #break
 
 def get_numbers():
     numbers = str(input('Please list the number of each type of element \
@@ -88,48 +89,68 @@ elements of which your molecule is composed as a comma-separated list. \
 Please list the values in the same order that you listed the elements \
 and please only enter integers. [ex: for water, type "2,0"] \
 Type "quit" to quit. '))
+    return numbers
+
+def format_numbers(numbers):
     numbers = numbers.replace(' ','')
-    #print(numbers)
+    try:
+        numbers.lower()
+    except:
+        pass
     return numbers
 
 
-def check_numbers(numbers):
-    try:
-        numbers = numbers.lower()
-        if numbers == 'quit':
-            sys.quit
-
-        elif numbers == '':
-            numbers = str(input("I'm sorry, but your input was not \
-of the correct form. Please try again (Type 'quit' to quit.) "))
-            numbers = numbers.replace(' ','')
-            check_numbers(numbers)
-    except:
-        return numbers
+def validate_numbers(numbers):
+        if numbers == 'quit' or '':
+            return False
         
+        else:
+            return True
+         
+def decision(bool_value,numbers):
+    if bool_value == False:
+        if numbers == 'quit':
+            sys.exit()
+        
+        elif numbers == '':
+            pass
+    else:
+        return numbers
 
-
-def clean_numbers(numbers):
+def list_numbers(numbers):
     numbers_list = []
-    numbers = numbers.replace(' ','')
     numbers = numbers.split(',')
     for number in numbers:
-        numbers_list.append(number)
+        numbers_list.append(int(number))
     return numbers_list
 
 
+def comp_lists(elements_list, numbers_list):
+    if len(elements_list) == len(numbers_list):
+        return True
+
+    else:
+        return False
 
 
 
 def main():
-    elements = get_elements()
-    elements = check_elements(elements)
-    elements_list = clean_elements(elements)
-    check_legit(elements_list, atomic_symbols)
-    numbers = get_numbers()
-    numbers = check_numbers(numbers)
-    numbers = clean_numbers(numbers)
-    #print(table)
+    while True:
+        elements = get_elements()
+        elements = format_elements(elements)
+        bool_value = validate_elements(elements)
+        elements = decision(bool_value,elements)
+        elements_list = list_elements(elements)
+        check_legit(elements_list, atomic_symbols)
+        numbers = get_numbers()
+        numbers = format_numbers(numbers)
+        bool_value_num = validate_numbers(numbers)
+        numbers = decision(bool_value_num, numbers)
+        numbers_list = list_numbers(numbers)
+        comp_lists(elements_list, numbers_list)
+
+
+
 if __name__ == '__main__':
     main()
          
@@ -259,3 +280,36 @@ if __name__ == '__main__':
 #
 #
 #
+        #sys.exit()
+
+        #elif elements == '':
+            #elements = str(input("I'm sorry, but your input was not \
+#of the correct form. Please try again (Type 'quit' to quit.) "))
+            #continue
+        
+        #else:
+            #return elements
+#def check_numbers(numbers):
+    #try:
+        #numbers = numbers.lower()
+        #if numbers == 'quit':
+            #sys.exit()
+
+        #elif numbers == '':
+            #numbers = str(input("I'm sorry, but your input was not \
+#of the correct form. Please try again (Type 'quit' to quit.) "))
+            #numbers = numbers.replace(' ','')
+            #check_numbers(numbers)
+    #except:
+        #return numbers
+        
+
+
+#def clean_numbers(numbers):
+    #numbers_list = []
+    #numbers = numbers.replace(' ','')
+    #numbers = numbers.split(',')
+    #for number in numbers:
+        #number = int(number)
+        #numbers_list.append(number)
+    #return numbers_list
