@@ -50,27 +50,30 @@ def validate_elements(elements):
             return True
          
 
-def list_elements(elements):
+def list_elements(elements,atomic_symbols):
     elements_list = []
     elements = elements.split(',')
     for element in elements:
-        elements_list.append(element)
+        if element in atomic_symbols:
+            elements_list.append(element)
+        else:
+            continue
     return elements_list
 
-def check_legit(elements_list, atomic_symbols):
-    for element in elements_list:
-        if element in atomic_symbols:
-            return True
-
-        else:
-            return False
-
-#def handle_bad_input(elements):
-    #if elements == 'quit':
-        #sys.exit()
-
-    #else:
-        #get_elements()
+#def check_legit(elements_list, atomic_symbols):
+    #for element in elements_list:
+        #if element in atomic_symbols:
+            #return True
+            #continue
+        #else:
+            #break
+        #return False
+    #break
+        #break    
+        #continue
+        #else:
+            #return True
+            
 
 
 
@@ -78,7 +81,7 @@ def get_numbers():
     numbers = str(input('Please list the number of each type of element \
 elements of which your molecule is composed as a comma-separated list. \
 Please list the values in the same order that you listed the elements \
-and please only enter integers. [ex: for water, type "2,0"] \
+and please only enter integers. [ex: for water, type "2,1"] \
 Type "quit" to quit. '))
     return numbers
 
@@ -158,18 +161,12 @@ def molar_mass_list(elements_dict,data_table):
             molar_mass_list.append(composite_mass)
             continue
     print(molar_mass_list)
-    return molar_mass_list[]
+    return molar_mass_list
 
 
 
 
 
-#def handle_bad_num(numbers):
-    #if numbers == 'quit':
-        #sys.exit()
-
-    #else:
-        #get_numbers
 
 
 def main_elements():
@@ -202,8 +199,13 @@ def main_numbers():
     #print(numbers_list)
 
 
-def prepare_calc():
-
+def prepare_calc(elements_list, numbers_list):
+    comp = comp_lists(elements_list, numbers_list)
+    while comp == False:
+        elements_list = main_elements()
+        numbers_list = main_numbers()
+    blah = zip_lists(elements_list, numbers_list)
+    print(blah)
 
 #def decision(bool_value,numbers):
     #if bool_value == False:
@@ -216,9 +218,9 @@ def prepare_calc():
         #return numbers
 
 def main():
-    main_elements()
-    main_numbers()
-
+    elements_list = main_elements()
+    numbers_list = main_numbers()
+    prepare_calc(elements_list, numbers_list)
 if __name__ == '__main__':
     main()
          
@@ -413,3 +415,16 @@ if __name__ == '__main__':
     #else:
         #return numbers
 
+#def handle_bad_input(elements):
+    #if elements == 'quit':
+        #sys.exit()
+
+    #else:
+        #get_elements()
+
+#def handle_bad_num(numbers):
+    #if numbers == 'quit':
+        #sys.exit()
+
+    #else:
+        #get_numbers
