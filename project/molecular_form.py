@@ -27,7 +27,7 @@ atomic_masses = (1.007944,4.0026022,6.9412,9.0121823,10.8117,12.01078,14.00672,1
 232.038062,231.035882,238.028913,237,244,243,247,247,251,252,257,258,259,262,
 267,268,271,272,270,276,281,280,285,)
 
-table = dict(zip(atomic_symbols, atomic_masses)) 
+data_table = dict(zip(atomic_symbols, atomic_masses)) 
 
 
 def get_elements():
@@ -115,6 +115,55 @@ def comp_lists(elements_list, numbers_list):
         return False
 
 
+def zip_lists(elements_list,numbers_list):
+    elements_dict = dict(zip(elements_list, numbers_list))
+    return elements_dict
+
+
+
+def what_calc():
+    calc = str(input("Would you like to convert to grams or to moles? \
+Enter 'g' for grams and 'm' for moles. "))
+    return calc
+
+def clean_what_calc(calc):
+    calc = (calc.lower()).replace(' ','')
+    return calc
+
+def check_len_what_calc(calc):
+    if len(calc) == 1:
+        return True
+    else:
+        return False
+
+def check_what_calc(calc):
+    if calc == 'g' or calc == 'm':
+        return True
+    else:
+        return False
+
+def analyze_what_calc(calc):
+    if calc == 'g':
+        return 'g'
+    elif calc == 'm':
+        return 'm'
+
+
+def molar_mass_list(elements_dict,data_table):
+    molar_mass_list = []
+    for key, value in elements_dict:
+        if key in data_table.keys():
+            atomic_mass = data_table[key]
+            composite_mass = value*atomic_mass
+            molar_mass_list.append(composite_mass)
+            continue
+    print(molar_mass_list)
+    return molar_mass_list[]
+
+
+
+
+
 #def handle_bad_num(numbers):
     #if numbers == 'quit':
         #sys.exit()
@@ -153,8 +202,18 @@ def main_numbers():
     #print(numbers_list)
 
 
+def prepare_calc():
 
 
+#def decision(bool_value,numbers):
+    #if bool_value == False:
+        #if numbers == 'quit':
+            #sys.exit()
+        
+        #elif numbers == '':
+            #pass
+    #else:
+        #return numbers
 
 def main():
     main_elements()
