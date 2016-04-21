@@ -88,7 +88,7 @@ Type "quit" to quit. '))
 def format_numbers(numbers):
     numbers = numbers.replace(' ','')
     try:
-        numbers.lower()
+        numbers = numbers.lower()
     except:
         pass
     return numbers
@@ -106,7 +106,12 @@ def list_numbers(numbers):
     numbers_list = []
     numbers = numbers.split(',')
     for number in numbers:
-        numbers_list.append(int(number))
+        try:
+            number = int(number)
+            numbers_list.append(number)
+
+        except:
+            continue
     return numbers_list
 
 

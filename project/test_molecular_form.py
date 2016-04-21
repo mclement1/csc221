@@ -35,7 +35,10 @@ from molecular_form import (
                             format_elements,
                             validate_elements,
                             list_elements,
-                            format_numbers
+                            format_numbers,
+                            validate_numbers,
+                            list_numbers,
+                            comp_lists,
                             #check_legit,
                             #atomic_symbols,
                             #atomic_masses,
@@ -87,6 +90,51 @@ class TestFormatNumbers(unittest.TestCase):
     def test_string_1(self):
         self.assertEqual(format_numbers('4  , 3, 5,7'),'4,3,5,7')
 
+    def test_quit(self):
+        self.assertEqual(format_numbers('q  U  I t   '),'quit')
+        
+    def test_empty(self):
+        self.assertEqual(format_numbers(''),'')
+
+
+
+class TestValidateNumbers(unittest.TestCase):
+
+    def test_quit(self):
+        self.assertFalse(validate_numbers('quit'))
+
+    def test_empty(self):
+        self.assertFalse(validate_numbers(''))
+
+    def test_string_1(self):
+        self.assertTrue(validate_numbers('3,6,2,7,4'))
+
+
+
+class TestListNumbers(unittest.TestCase):
+
+    def test_list_1(self):
+        self.assertEqual(list_numbers('4,2,7,5,7,3'),[4,2,7,5,7,3])
+
+    def test_list_2(self):
+        self.assertEqual(list_numbers('4,7,2,3.6,8,2.8'),[4,7,2,8])
+
+    def test_list_3(self):
+        self.assertEqual(list_numbers('4.5,3.2,5.6,7.4'),[])
+
+
+
+class TestCompLists(unittest.TestCase):
+
+    def test_one(self):
+        elements_list = ['h','he','li']
+        numbers_list = [2,3,4]
+        self.assertTrue(comp_lists(elements_list, numbers_list))
+
+    def test_two(self):
+        elements_list = ['h','he','li','be']
+        numbers_list = [3,5,1]
+        self.assertFalse(comp_lists(elements_list, numbers_list))
 
 
 
