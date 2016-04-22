@@ -161,8 +161,10 @@ def molar_mass_list(elements_dict,data_table):
     molar_mass_list = []
     for key, value in elements_dict:
         if key in data_table.keys():
-            atomic_mass = data_table[key]
-            composite_mass = value*atomic_mass
+            atomic_mass = float(data_table[key])
+            coefficient = float(elements_dict[key])
+            composite_mass = coefficient*atomic_mass
+            #composite_mass = float(value)*atomic_mass
             molar_mass_list.append(composite_mass)
             continue
     print(molar_mass_list)
@@ -184,7 +186,7 @@ def main_elements():
         else:
             elements = format_elements(get_elements())
             bool_value = validate_elements(elements)
-    elements_list = list_elements(elements)
+    elements_list = list_elements(elements,atomic_symbols)
     return elements_list
     #print(elements_list)
 
@@ -226,6 +228,9 @@ def main():
     elements_list = main_elements()
     numbers_list = main_numbers()
     prepare_calc(elements_list, numbers_list)
+    print(data_table)
+
+
 if __name__ == '__main__':
     main()
          

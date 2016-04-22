@@ -39,6 +39,11 @@ from molecular_form import (
                             validate_numbers,
                             list_numbers,
                             comp_lists,
+                            clean_what_calc,
+                            check_len_what_calc,
+                            check_what_calc,
+                            analyze_what_calc,
+                            molar_mass_list,
                             #check_legit,
                             #atomic_symbols,
                             #atomic_masses,
@@ -138,32 +143,64 @@ class TestCompLists(unittest.TestCase):
 
 
 
-#class TestCheckLegit(unittest.TestCase):
+class TestCleanWhatCalc(unittest.TestCase):
 
-    #def test_list1(self):
-        #elements_list = ['h','li','br','ne']
-        #self.assertTrue(check_legit(elements_list,atomic_symbols))
+    def test_grams(self):
+        self.assertEqual(clean_what_calc('G   r  AmS  '),'grams')
 
-    #def test_list2(self):
-        #elements_list = ['br','jj','k']
-        #self.assertFalse(check_legit(elements_list,atomic_symbols))
-
-    #def test_list3(self):
-        #elements_list = ['aa','bb','cc','dd']
-        #self.assertFalse(check_legit(elements_list,atomic_symbols))
-
-#class TestCheckNumbers(unittest.TestCase):
-
-    #def test_quit(self):
-        #with self.assertRaises(SystemExit):
-            #check_numbers('quit')
+    def test_moles(self):
+        self.assertEqual(clean_what_calc('  mO  lES'),'moles')
 
 
-#class TestCleanNumbers(unittest.TestCase):
 
-    #def test_ethanol(self):
-        #numbers_list = [2,6,1]
-        #self.assertEqual(clean_numbers('2,6,1'),numbers_list)
+
+class TestCheckLenWhatCalc(unittest.TestCase):
+
+    def test_empty(self):
+        self.assertFalse(check_len_what_calc(''))
+
+    def test_g(self):
+        self.assertTrue(check_len_what_calc('g'))
+
+    def test_grams(self):
+        self.assertFalse(check_len_what_calc('grams'))
+
+
+
+
+class TestCheckWhatCalc(unittest.TestCase):
+    
+    def test_g(self):
+        self.assertTrue(check_what_calc('g'))
+
+    def test_m(self):
+        self.assertTrue(check_what_calc('m'))
+
+    def test_a(self):
+        self.assertFalse(check_what_calc('a'))
+
+
+
+
+class TestAnalyzeWhatCalc(unittest.TestCase):
+
+    def test_g(self):
+        self.assertEqual(analyze_what_calc('g'),'g')
+
+    def test_m(self):
+        self.assertEqual(analyze_what_calc('m'),'m')
+
+
+class TestMolarMassList(unittest.TestCase):
+
+    def test_dict_one(self):
+        elements_dict = {'h':1,'he':2,'li':3}
+        self.assertEqual(molar_mass_list(elements_dict,data_table), \
+[1.007944,8.0052044,20.8236])
+
+
+
+
 
 
 
