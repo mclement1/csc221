@@ -2,6 +2,9 @@
 
 import sys
 
+
+#Tuple containing all valid atomic symbols
+
 atomic_symbols = ('H','He','Li','Be','B','C','N','O','F','Ne','Na','Mg','Al',
 'Si','P','S','Cl','Ar','K','Ca','Sc','Ti','V','Cr','Mn','Fe','Co','Ni','Cu',
 'Zn','Ga','Ge','As','Se','Br','Kr','Rb','Sr','Y','Zr','Nb','Mo','Tc','Ru','Rh',
@@ -12,6 +15,9 @@ atomic_symbols = ('H','He','Li','Be','B','C','N','O','F','Ne','Na','Mg','Al',
 'Mt','Ds','Rg','Cn',)
 
 atomic_symbols = [x.lower() for x in atomic_symbols]
+
+#Tuple containing the atomic masses corresponding to the
+#atomic symbols
 
 atomic_masses = (1.007944,4.0026022,6.9412,9.0121823,10.8117,12.01078,14.00672,15.99943,
 18.99840325,20.17976,22.989769282,24.30506,26.98153868,28.08553,
@@ -27,9 +33,14 @@ atomic_masses = (1.007944,4.0026022,6.9412,9.0121823,10.8117,12.01078,14.00672,1
 232.038062,231.035882,238.028913,237,244,243,247,247,251,252,257,258,259,262,
 267,268,271,272,270,276,281,280,285,)
 
+
+#Create a dictionary linking atomic symbol with appropriate
+#mass
+
 data_table = dict(zip(atomic_symbols, atomic_masses)) 
 
 
+#Collect list of atomic symbols from user
 def get_elements():
     elements = str(input('Please list the elements of which \
 your molecule is composed as a comma-separated list. \
@@ -37,11 +48,15 @@ your molecule is composed as a comma-separated list. \
     return elements
 
 
+#Convert all user input to lowercase and remove
+#excess spaces
 def format_elements(elements):
     elements = (elements.lower()).replace(' ','')
     return elements
 
 
+#Determine if user has entered something other
+#than a comma-separated list
 def validate_elements(elements):
         if elements == 'quit' or elements == '':
             return False
@@ -50,6 +65,9 @@ def validate_elements(elements):
             return True
          
 
+#Determine which of the atomic symbols entered
+#by the user are legitimate, and add these
+#to a python list called 'elements_list'
 def list_elements(elements,atomic_symbols):
     elements_list = []
     elements = elements.split(',')
@@ -60,23 +78,8 @@ def list_elements(elements,atomic_symbols):
             continue
     return elements_list
 
-#def check_legit(elements_list, atomic_symbols):
-    #for element in elements_list:
-        #if element in atomic_symbols:
-            #return True
-            #continue
-        #else:
-            #break
-        #return False
-    #break
-        #break    
-        #continue
-        #else:
-            #return True
-            
 
-
-
+#Collect list of numerical values from user
 def get_numbers():
     numbers = str(input('Please list the number of each type of element \
 elements of which your molecule is composed as a comma-separated list. \
@@ -85,6 +88,11 @@ and please only enter integers. [ex: for water, type "2,1"] \
 Type "quit" to quit. '))
     return numbers
 
+
+
+#Remove excess spaces from user input and,
+#if the user's input is non-numerical,
+#convert it to lowercase
 def format_numbers(numbers):
     numbers = numbers.replace(' ','')
     try:
@@ -94,6 +102,8 @@ def format_numbers(numbers):
     return numbers
 
 
+#Determine if the user has entered something other
+#than a comma-separated list
 def validate_numbers(numbers):
         if numbers == 'quit' or numbers == '':
             return False
@@ -102,6 +112,9 @@ def validate_numbers(numbers):
             return True
          
 
+#Confirm that the input from the user is a comma-
+#separated list of numbers, and add all integers
+#to a python list called 'numbers_list'
 def list_numbers(numbers):
     numbers_list = []
     numbers = numbers.split(',')
@@ -115,6 +128,8 @@ def list_numbers(numbers):
     return numbers_list
 
 
+#Confirm that the user entered the same number
+#of atomic symbols as numbers
 def comp_lists(elements_list, numbers_list):
     if len(elements_list) == len(numbers_list):
         return True
@@ -123,12 +138,15 @@ def comp_lists(elements_list, numbers_list):
         return False
 
 
+
+#Combine elements_list and numbers_list together
+#into a dictionary called 'elements_dict'
 def zip_lists(elements_list,numbers_list):
     elements_dict = dict(zip(elements_list, numbers_list))
     return elements_dict
 
 
-
+#Ask the user what kind of calculation he 
 def what_calc():
     calc = str(input("Would you like to convert to grams or to moles? \
 Enter 'g' for grams and 'm' for moles. "))
@@ -157,22 +175,17 @@ def analyze_what_calc(calc):
         return 'm'
 
 
-def molar_mass_list(elements_dict,data_table):
-    molar_mass_list = []
-    for key, value in elements_dict:
-        if key in data_table.keys():
-            atomic_mass = float(data_table[key])
-            coefficient = float(elements_dict[key])
-            composite_mass = coefficient*atomic_mass
-            #composite_mass = float(value)*atomic_mass
-            molar_mass_list.append(composite_mass)
-            continue
-    print(molar_mass_list)
-    return molar_mass_list
 
-
-
-
+def calc_molar_mass(elements_dict,data_table):
+    molar_mass = 0
+    for element in elements_dict.keys():
+        atomic_mass = float(data_table[element])
+        coefficient = float(elements_dict[element])
+        composite_mass = coefficient*atomic_mass
+        molar_mass = molar_mass + composite_mass
+        #return molar_mass
+    #print(molar_mass)
+    return molar_mass
 
 
 
@@ -211,24 +224,16 @@ def prepare_calc(elements_list, numbers_list):
     while comp == False:
         elements_list = main_elements()
         numbers_list = main_numbers()
-    blah = zip_lists(elements_list, numbers_list)
-    print(blah)
-
-#def decision(bool_value,numbers):
-    #if bool_value == False:
-        #if numbers == 'quit':
-            #sys.exit()
-        
-        #elif numbers == '':
-            #pass
-    #else:
-        #return numbers
+    elements_dict = zip_lists(elements_list, numbers_list)
+    #print(blah)
+    return elements_dict
 
 def main():
     elements_list = main_elements()
     numbers_list = main_numbers()
-    prepare_calc(elements_list, numbers_list)
-    print(data_table)
+    elements_dict = prepare_calc(elements_list, numbers_list)
+    calc_molar_mass(elements_dict,data_table)
+    #print(data_table)
 
 
 if __name__ == '__main__':
@@ -236,205 +241,3 @@ if __name__ == '__main__':
          
          
          
-         #while elements == '':
-         #elements = str(input("I'm sorry, but your input was not \
-#of the correct form. Please try again (Type 'quit' to quit.) "))
-    #while elements != '':
-        #if elements == 'quit':
-            #return elements
-            #break
-            #sys.exit()
-        #else:
-            #print(elements)
-            #return elements
-            #clean_elements(elements)
-            #return elements
-#def check_elements(elements):
-    #elements == (elements.lower()).replace(' ','')
-    #while elements == '':
-        #elements = str(input("I'm sorry, but your input was not \
-#of the correct form. Please try again (Type 'quit' to quit.) "))
-        #continue
-        #while True:
-    #while elements == elements:
-    #while elements != '':
-        #if elements == 'quit':
-            #break
-        #break
-        #elif elements == '':
-            #elements = str(input("I'm sorry, but your input was not \
-#of the correct form. Please try again (Type 'quit' to quit.) "))
-            #continue
-        #else:
-            #print(elements)
-            #return elements
-    #return elements
-
-
-
-#def get_numbers():
-#    numbers = str(input('Please list the number of each \
-#type of element present in your molecule as a \
-#comma-separated list. Please list the numbers in the \
-#same order you listed the elements above. Please input \
-#only positive integers. [ex: for water, type "2,0"] Type \
-#"quit" to quit. '))
-#
-#def check_numbers(numbers):
-#    numbers = (numbers.lower()).replace(' ','')
-#    while True:
-#        if numbers == 'quit':
-#            break
-#        elif numbers == '':
-#            numbers = str(input("I'm sorry, but your input was not \
-#of the correct form. Please try again (Type 'quit' to quit.) "))
-#        else:
-#            return numbers
-#
-#
-#def clean_numbers():
-#    numbers_list = []
-#    numbers = numbers.split(',')
-#    for i in numbers:
-#        numbers_list.append(int(i))
-#
-#
-#def comp_lists(elements_list, numbers_list):
-#    if len(elements_list) != len(numbers_list):
-#        user_answer = input("I'm sorry, but the number \
-#of elements that you entered and the number of numerical \
-#values that you entered are not the same. Would you like \
-#to try again? Type 'y' to continue or 'n' to quit")
-#        return user_answer
-#
-#def parse_user_answer(user_answer):
-#    user_answer = (user_answer.lower()).replace(' ','')
-#    while True:
-#        if user_answer == 'y':
-#            #call get_elements
-#        elif user_answer == 'n':
-#            break
-#        else:
-#            user_answer = input("I'm sorry, but I did \
-#not understand your answer. Please try again.")
-#            return user_answer
-#
-##def molar_mass():
-##def what_value():
-##def compute_moles():
-##def compute_grams():
-##def continue():
-#
-##def get_elements():
-#    #elements_list = []
-#
-#    #elements = str(input('Please list the elements of which \
-##your molecule is composed as a comma-separated list. \
-##[ex: for water, type "H,O"] Type "quit" to quit. '))
-#
-#
-#    #while elements == '':
-#        #elements = str(input("I'm sorry, but your input was not \
-##of the correct form. Please try again (Type 'quit' to quit.) "))
-#
-#
-#    #while elements != '':
-#
-#        #if elements.lower() == 'quit':
-#            #break
-#
-#        #else:
-#            #elements = elements.lower()
-#            #elements = elements.replace(' ','')
-#            #elements = elements.split(',')
-#            #for i in elements:
-#                #elements_list.append(i)
-#
-#        #print(elements_list)
-#        #break
-#    #return elements_list
-#
-#
-##def check_elements(passed_list):
-#    #print(passed_list)
-#
-#
-#
-        #sys.exit()
-
-        #elif elements == '':
-            #elements = str(input("I'm sorry, but your input was not \
-#of the correct form. Please try again (Type 'quit' to quit.) "))
-            #continue
-        
-        #else:
-            #return elements
-#def check_numbers(numbers):
-    #try:
-        #numbers = numbers.lower()
-        #if numbers == 'quit':
-            #sys.exit()
-
-        #elif numbers == '':
-            #numbers = str(input("I'm sorry, but your input was not \
-#of the correct form. Please try again (Type 'quit' to quit.) "))
-            #numbers = numbers.replace(' ','')
-            #check_numbers(numbers)
-    #except:
-        #return numbers
-        
-
-
-#def clean_numbers(numbers):
-    #numbers_list = []
-    #numbers = numbers.replace(' ','')
-    #numbers = numbers.split(',')
-    #for number in numbers:
-        #number = int(number)
-        #numbers_list.append(number)
-    #return numbers_list
-
-    
-#def decision(bool_value,elements):
-    #if bool_value == False:
-        #if elements == 'quit':
-            #sys.exit()
-        
-        #elif elements == '':
-            #pass
-    #else:
-        #return elements
-
-
-            #elements = input("I'm sorry, but {i} is not \
-#a legitimate atomic symbol. Please re-enter your list of \
-#atomic symbols ".format(i = element))
-            #elements = check_elements(elements)
-            #elements = clean_elements(elements)
-            #elements = check_legit(elements,atomic_symbols)
-            #break
-
-
-#def decision(bool_value,numbers):
-    #if bool_value == False:
-        #if numbers == 'quit':
-            #sys.exit()
-        
-        #elif numbers == '':
-            #pass
-    #else:
-        #return numbers
-
-#def handle_bad_input(elements):
-    #if elements == 'quit':
-        #sys.exit()
-
-    #else:
-        #get_elements()
-
-#def handle_bad_num(numbers):
-    #if numbers == 'quit':
-        #sys.exit()
-
-    #else:
-        #get_numbers
