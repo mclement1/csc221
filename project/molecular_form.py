@@ -150,7 +150,7 @@ def zip_lists(elements_list,numbers_list):
 #of calculation he would like to perform
 def what_calc():
     calc = str(input("Would you like to convert to grams or to moles? \
-Enter 'g' for grams and 'm' for moles. "))
+Enter 'g' for grams and 'm' for moles. Type 'quit' to quit. "))
     return calc
 
 
@@ -191,7 +191,7 @@ def analyze_what_calc(calc):
 #starting number of moles
 def how_many_moles():
     moles = str(input('How many moles \
-do you have? '))
+do you have? Type "quit" to quit. '))
     return moles
 
 
@@ -223,7 +223,7 @@ def make_moles_float(moles):
 #starting number of grams
 def how_many_grams():
     grams = str(input('How many grams \
-do you have? '))
+do you have? Type "quit" to quit. '))
     return grams
 
 
@@ -329,6 +329,17 @@ def prepare_calc(elements_list, numbers_list):
     elements_dict = zip_lists(elements_list, numbers_list)
     #print(blah)
     return elements_dict
+
+
+def perform_calc(elements_dict):
+    type_calc = what_calc()
+    type_calc = clean_what_calc(type_calc)
+    type_calc = check_len_what_calc(type_calc)
+    while type_calc == False:
+
+
+
+
 
 def main():
     elements_list = main_elements()
