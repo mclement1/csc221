@@ -154,13 +154,21 @@ Enter 'g' for grams and 'm' for moles. Type 'quit' to quit. "))
     return calc
 
 
+
+
 #Strip excess spaces from the user's input
 #and convert the input to lowercase
 def clean_what_calc(calc):
-    calc = (calc.lower()).replace(' ','')
+    calc = calc.replace(' ','')
     return calc
 
 
+#Determine if input is numerical or not
+def is_alpha(calc):
+    return calc.isalpha()
+    
+    
+    
 #Check to see that the input is one-character
 #in length
 def check_len_what_calc(calc):
@@ -269,8 +277,6 @@ def calc_molar_mass(elements_dict,data_table):
         coefficient = float(elements_dict[element])
         composite_mass = coefficient*atomic_mass
         molar_mass = molar_mass + composite_mass
-        #return molar_mass
-    #print(molar_mass)
     return molar_mass
 
 
@@ -321,32 +327,81 @@ def main_numbers():
     #print(numbers_list)
 
 
-def prepare_calc(elements_list, numbers_list):
+def prepare_data(elements_list, numbers_list):
     comp = comp_lists(elements_list, numbers_list)
     while comp == False:
         elements_list = main_elements()
         numbers_list = main_numbers()
     elements_dict = zip_lists(elements_list, numbers_list)
-    #print(blah)
     return elements_dict
 
 
-def perform_calc(elements_dict):
+def prepare_calc():
     type_calc = what_calc()
     type_calc = clean_what_calc(type_calc)
-    type_calc = check_len_what_calc(type_calc)
-    while type_calc == False:
+    bool_value = is_alpha(type_calc)
+    while bool_value == False:
+        type_calc = clean_what_calc(what_calc())
+        bool_value = is_alpha(type_calc)
+    type_calc = type_calc.lower()    
+    
+    length_calc = check_len_what_calc(type_calc)
+    while length_calc == False:
+        type_calc = clean_what_calc(what_calc())
+        bool_value = is_alpha(type_calc)
+        length_calc = check_len_what_calc(type_calc)
+    
+    valid_calc = check_what_calc(type_calc)
+    while valid_calc == False:
+        type_calc = clean_what_calc(what_calc())
+        bool_value = is_alpha(type_calc)
+        length_calc = check_len_what_calc(type_calc)
+        valid_calc = check_what_calc(type_calc)
+    calc_type = analyze_what_calc(type_calc)
+    return calc_type
 
-
-
+def perform_calc(elements_dict,calc_type):
+    molar_mass = calc_molar_mass(elements_dict,data_table)
+    if calc_type == 'g':
+        units = 'grams'
+        moles = how_many_moles()
+        moles = format_moles(moles)
+        is_num = confirm_float_moles(moles)
+        while is_num == False:
+            is_quit = handle_not_float(moles)
+            if is_quit == True:
+                sys.exit()
+            else:
+                moles = format_moles(how_many_moles())
+                is_num = confirm_float_moles(moles)
+        moles = make_moles_float(moles)
+        answer = moles_to_grams(moles, molar_mass)
+        return str(answer) + ' ' + units
+    
+    elif calc_type == 'm':
+        units = 'mol'
+        grams = how_many_grams()
+        grams = format_grams(grams)
+        is_num = confirm_float_grams(grams)
+        while is_num == False:
+            is_quit = handle_not_float(grams)
+            if is_quit == True:
+                sys.exit()
+            else:
+                grams = format_grams(how_many_grams())
+                is_num = confirm_float_grams(grams)
+        grams = make_grams_float(grams)
+        answer = grams_to_moles(grams, molar_mass)
+        return str(answer) + ' ' + units
 
 
 def main():
     elements_list = main_elements()
     numbers_list = main_numbers()
-    elements_dict = prepare_calc(elements_list, numbers_list)
-    calc_molar_mass(elements_dict,data_table)
-    #print(data_table)
+    elements_dict = prepare_data(elements_list, numbers_list)
+    calc_type = prepare_calc()
+    answer = perform_calc(elements_dict, calc_type) 
+    print(answer)
 
 
 if __name__ == '__main__':
