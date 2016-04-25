@@ -146,28 +146,40 @@ def zip_lists(elements_list,numbers_list):
     return elements_dict
 
 
-#Ask the user what kind of calculation he 
+#Collect input from the user concerning the kind
+#of calculation he would like to perform
 def what_calc():
     calc = str(input("Would you like to convert to grams or to moles? \
 Enter 'g' for grams and 'm' for moles. "))
     return calc
 
+
+#Strip excess spaces from the user's input
+#and convert the input to lowercase
 def clean_what_calc(calc):
     calc = (calc.lower()).replace(' ','')
     return calc
 
+
+#Check to see that the input is one-character
+#in length
 def check_len_what_calc(calc):
     if len(calc) == 1:
         return True
     else:
         return False
 
+
+#Confirm that the user input is one of the
+#two valid options
 def check_what_calc(calc):
     if calc == 'g' or calc == 'm':
         return True
     else:
         return False
 
+#Determine which calculation the user would
+#actually like to perform
 def analyze_what_calc(calc):
     if calc == 'g':
         return 'g'
@@ -175,7 +187,81 @@ def analyze_what_calc(calc):
         return 'm'
 
 
+#Collect user input regarding his
+#starting number of moles
+def how_many_moles():
+    moles = str(input('How many moles \
+do you have? '))
+    return moles
 
+
+#Remove excess spaces from number of moles
+def format_moles(moles):
+    moles = moles.replace(' ','')
+    return moles
+
+#Determine whether or not a floating point
+#number was entered
+def confirm_float_moles(moles):
+    try:
+        moles = float(moles)
+        return True
+    except:
+        return False
+    
+
+#Convert entered number of moles
+#to floating point number
+def make_moles_float(moles):
+    moles = float(moles)
+    return moles
+
+
+
+
+#Collect user input regarding his
+#starting number of grams
+def how_many_grams():
+    grams = str(input('How many grams \
+do you have? '))
+    return grams
+
+
+
+#Remove excess spaces from number of grams
+def format_grams(grams):
+    grams = grams.replace(' ','')
+    return grams
+
+#Determine whether or not a floating point
+#number was entered
+def confirm_float_grams(grams):
+    try:
+        grams = float(grams)
+        return True
+    except:
+        return False
+    
+
+#Convert entered number of grams
+#to floating point number
+def make_grams_float(grams):
+    grams = float(grams)
+    return grams
+
+
+
+#Handle cases where a floating point number
+#was not entered
+def handle_not_float(starting):
+    starting = starting.lower()
+    if starting == 'quit':
+        return True
+    else:
+        return False
+
+#Calculate the molar mass of the molecule
+#in question
 def calc_molar_mass(elements_dict,data_table):
     molar_mass = 0
     for element in elements_dict.keys():
@@ -186,6 +272,22 @@ def calc_molar_mass(elements_dict,data_table):
         #return molar_mass
     #print(molar_mass)
     return molar_mass
+
+
+
+#Convert from moles to grams
+def moles_to_grams(moles,molar_mass):
+    grams = moles*molar_mass
+    return grams
+
+
+
+
+#Convert from grams to moles
+def grams_to_moles(grams, molar_mass):
+    moles = grams/molar_mass
+    return moles
+
 
 
 
