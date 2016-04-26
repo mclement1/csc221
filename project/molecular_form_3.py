@@ -10,7 +10,9 @@ from molecular_form_2 import (
         validate_elements,
         list_elements,
         get_numbers,
-        only_num
+        only_num,
+        comp_lists,
+        zip_lists,
 )
 
 
@@ -61,8 +63,12 @@ def func_three(elements_formatted):
 a non-valid atomic symbol. Please try again.")
             print('\t')
             elements = func_one()
-            elements = func_two(elements)
+            elements_formatted = func_two(elements)
             continue
+    return elements
+
+
+    
 
 def func_four():
     numbers = get_numbers()
@@ -84,11 +90,51 @@ Please try again.")
             continue
     return numbers
 
+
+def func_five(numbers):
+    numbers_list = []
+    numbers = numbers.replace(' ','')
+    numbers = numbers.split(',')
+    for number in numbers:
+        numbers_list.append(int(number))
+
+    return numbers_list
+
+
+
+
+def func_six(elements_list, numbers_list):
+    bool_value = comp_lists(elements_list, numbers_list)
+    return bool_value
+
+def func_seven(bool_value):    
+    while bool_value == False:
+        print('\t')
+        print("I'm sorry, but you have not entered the \
+same number of integers as atomic symbols. Please try again.")
+        print('\t')
+        elements_list = func_three(func_two(func_one()))
+        numbers_list = func_five(func_four())
+        bool_value = comp_lists(elements_list, numbers_list)
+        continue
+    #print(elements_list, numbers_list)
+    elements_dict = zip_lists(elements_list, numbers_list)
+    #print(elements_dict)
+    return elements_dict
+
+
+
+
+
 def main():
     elements = func_one()
     elements_formatted = func_two(elements)
     elements_list = func_three(elements_formatted)
     numbers = func_four()
+    numbers_list = func_five(numbers)
+    bool_value = func_six(elements_list, numbers_list)
+    #elements_list, numbers_list = func_six(elements_list, numbers_list)
+    func_seven(bool_value)
 
 
 
