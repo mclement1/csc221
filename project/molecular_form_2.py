@@ -63,7 +63,7 @@ def only_alpha(elements_stripped):
 
 #Convert user input to lowercase and remove
 #excess spaces
-def format_elements(elements):
+def format_input(elements):
     elements = (elements.lower()).replace(' ','')
     return elements
 
@@ -88,9 +88,14 @@ def validate_elements(elements):
         else:
             print("I'm sorry, but you have entered \
 a non-valid atomic symbol. Please try again.")
-            elements = get_elements()
-            alpha_only
-    return element
+            #elements = func_one()
+            #elements = func_two(elements)
+            return elements
+            #elements = get_elements()
+            #elements_stripped = rem_comm_spaces(elements)
+            #alpha_only = alpha_only(elements_stripped)
+            
+    return elements
 
 
 #Create a list of valid atomic_symbols
@@ -126,6 +131,12 @@ Please list the values in the same order that you listed the elements \
 and please only enter integers. [ex: for water, type "2,1"] \
 Type "quit" to quit. '))
     return numbers
+
+
+def only_num(numbers):
+    #numbers = unicode(numbers, 'utf-8')
+    num_only = numbers.isdigit()
+    return num_only
 
 
 
