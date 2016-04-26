@@ -18,7 +18,20 @@ from molecular_form_2 import (
         clean_what_calc,
         is_alpha,
         check_len_what_calc,
-)
+        check_what_calc,
+        analyze_what_calc,
+        how_many_moles,
+        format_moles,
+        confirm_float_moles,
+        make_moles_float,
+        how_many_grams,
+        format_grams,
+        confirm_float_grams,
+        make_grams_float,
+        handle_not_float,
+        moles_to_grams,
+        grams_to_moles
+        )
 
 
 atomic_symbols = ('H','He','Li','Be','B','C','N','O','F','Ne','Na','Mg','Al',
@@ -175,6 +188,7 @@ a punctuation mark, or the empty string. Please try again")
         continue
     return calc_cleaned
 
+
 def func_ten(calc_cleaned):
     calc_cleaned = calc_cleaned.lower()
     len_bool_value = check_len_what_calc(calc_cleaned)
@@ -195,8 +209,49 @@ calculation type. Please try again.")
     return calc_cleaned
 
 
- 
+def func_eleven(calc_cleaned, molar_mass):
+    calc = analyze_what_calc(calc_cleaned)
+    if calc == 'g':
+        moles = how_many_moles()
+        formatted_moles = format_moles(moles)
+        float_bool_value = confirm_float_moles(formatted_moles)
+        while float_bool_value == False:
+            bool_not_float = handle_not_float(formatted_moles)
+            if bool_not_float == True:
+                sys.exit()
 
+            else:
+                print("I'm sorry, but you did not enter a floating-point \
+value. Please try again.")
+                moles = how_many_moles()
+                formatted_moles = format_moles(moles)
+                float_bool_value = confirm_float_moles(formatted_moles)
+                continue
+        moles = make_moles_float(moles)
+        grams = moles_to_grams(moles,molar_mass)
+        return str(grams) + ' ' + 'g'
+        #return moles
+
+    elif calc == 'm':
+        grams = how_many_grams()
+        formatted_grams = format_grams(grams)
+        float_bool_value = confirm_float_grams(formatted_grams)
+        while float_bool_value == False:
+            bool_not_float = handle_not_float(formatted_grams)
+            if bool_not_float == True:
+                sys.exit()
+
+            else:
+                print("I'm sorry, but you did not enter a floating-point \
+value. Please try again.")
+                grams = how_many_grams()
+                formatted_grams= format_grams(grams)
+                float_bool_value = confirm_float_grams(formatted_grams)
+                continue
+        grams = make_grams_float(grams)
+        moles = grams_to_moles(grams,molar_mass)
+        return str(moles) + ' ' + 'mol'
+        #return grams
 
 
 def main():
@@ -210,6 +265,10 @@ def main():
     molar_mass = func_eight(elements_dict, data_table)
     calc_cleaned = func_nine()
     calc_cleaned = func_ten(calc_cleaned)
+    answer = func_eleven(calc_cleaned,molar_mass)
+    print('You have ' + answer)
+
+
 
 if __name__=='__main__':
     main()
