@@ -118,6 +118,104 @@ class TestZipLists(unittest.TestCase):
 
 class TestCalcMolarMass(unittest.TestCase):
 
+    def test_one(self):
+        elements_dict = {'h':2,'he':3,'md':2}
+        self.assertAlmostEqual(calc_molar_mass(elements_dict,data_table),
+                                530.0236946)
+
+    def test_two(self):
+        elements_dict = {'h':3,'be':2,'c':6}
+        self.assertAlmostEqual(calc_molar_mass(elements_dict,data_table),
+                                93.1128766)
+
+class TestCleanWhatCalc(unittest.TestCase):
+
+    def test_one(self):
+        self.assertEqual(clean_what_calc('  f,d,g  .dfs '),'f,d,g.dfs')
+
+class TestIsAlpha(unittest.TestCase):
+
+    def test_one(self):
+        self.assertTrue(is_alpha('sdfweSDF'))
+
+    def test_two(self):
+        self.assertFalse(is_alpha(''))
+
+    def test_three(self):
+        self.assertFalse(is_alpha('sdf 434 df'))
+
+    def test_four(self):
+        self.assertFalse(is_alpha('@#@$sfds'))
+
+
+class TestCheckLenWhatCalc(unittest.TestCase):
+
+    def test_one(self):
+        self.assertTrue(check_len_what_calc('g'))
+
+    def test_two(self):
+        self.assertFalse(check_len_what_calc(''))
+
+    def test_three(self):
+        self.assertFalse(check_len_what_calc('sddfsdf'))
+
+class TestAnalyzeWhatCalc(unittest.TestCase):
+
+    def test_one(self):
+        self.assertEqual(analyze_what_calc('g'),'g')
+
+    def test_two(self):
+        self.assertEqual(analyze_what_calc('m'),'m')
+
+class TestFormatMoles(unittest.TestCase):
+
+    def test_one(self):
+        self.assertEqual(format_moles('    4.  235 32'),'4.23532')
+
+class TestConfirmFloatMoles(unittest.TestCase):
+
+    def test_one(self):
+        self.assertTrue(confirm_float_moles('3.42342'))
+
+    def test_two(self):
+        self.assertFalse(confirm_float_moles('3.43gn5'))
+
+
+class TestMakeMolesFloat(unittest.TestCase):
+
+    def test_one(self):
+        self.assertEqual(make_moles_float('4.2342'),4.2342)
+
+    def test_two(self):
+        self.assertEqual(make_moles_float('4'),4)
+
+class TestFormatGrams(unittest.TestCase):
+
+    def test_one(self):
+        self.assertEqual(format_grams('s sfs , s'),'ssfs,s')
+
+
+class TestConfirmFloatGrams(unittest.TestCase):
+
+    def test_one(self):
+        self.assertTrue(confirm_float_grams('3.45235'))
+
+    def test_two(self):
+        self.assertTrue(confirm_float_grams('2'))
+
+    def test_three(self):
+        self.assertFalse(confirm_float_grams('sdfsd343'))
+
+
+class TestMakeGramsFloat(unittest.TestCase):
+
+    def test_one(self):
+        self.assertEqual(make_grams_float('4.3242'),4.3242)
+
+    def test_two(self):
+        self.assertEqual(make_grams_float('69'),69)
+
+
 
 
 
