@@ -168,7 +168,7 @@ def func_seven(elements_list, numbers_list):
 
 def func_eight(elements_dict, data_table):
     molar_mass = calc_molar_mass(elements_dict, data_table)
-    print(molar_mass)
+    #print(molar_mass)
     return molar_mass
 
 
@@ -254,6 +254,14 @@ value. Please try again.")
         #return grams
 
 
+def func_twelve():
+    print('\n')
+    another_calc = input("Would you like to perform another \
+calculation? If so, type 'yes'; otherwise, type 'quit' \
+to quit.")
+
+
+
 def main():
     elements = func_one()
     elements_formatted = func_two(elements)
@@ -264,10 +272,9 @@ def main():
     elements_dict = func_seven(elements_list, numbers_list)
     molar_mass = func_eight(elements_dict, data_table)
     calc_cleaned = func_nine()
-    calc_cleaned = func_ten(calc_cleaned)
     answer = func_eleven(calc_cleaned,molar_mass)
-    print('You have ' + answer)
-
+    print(answer)
+    func_twelve()
 
 
 if __name__=='__main__':

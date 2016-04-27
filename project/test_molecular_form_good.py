@@ -216,6 +216,36 @@ class TestMakeGramsFloat(unittest.TestCase):
         self.assertEqual(make_grams_float('69'),69)
 
 
+class TestHandleNotFloat(unittest.TestCase):
+
+    def test_one(self):
+        self.assertTrue(handle_not_float('quit'))
+
+    def test_two(self):
+        self.assertFalse(handle_not_float('sfds'))
+
+    def test_three(self):
+        self.assertFalse(handle_not_float('234wfsdf'))
+
+    def test_four(self):
+        self.assertFalse(handle_not_float('wer@#$@534'))
+
+
+class TestMolesToGrams(unittest.TestCase):
+
+    def test_one(self):
+        moles = 3.456
+        molar_mass = 2.421
+        self.assertAlmostEqual(moles_to_grams(moles,molar_mass),8.366976)
+
+
+class TestGramsToMoles(unittest.TestCase):
+
+    def test_one(self):
+        grams = 5.321
+        molar_mass = 89.123
+        self.assertAlmostEqual(grams_to_moles(grams, molar_mass), 0.059704005)
+
 
 
 
