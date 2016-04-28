@@ -45,6 +45,7 @@ def get_elements():
     elements = str(input('Please list the elements of which \
 your molecule is composed as a comma-separated list. \
 [ex: for water, type "H,O"] Type "quit" to quit. '))
+    print('\n')
     return elements
 
 #Strip commas and spaces from input to determine
@@ -488,6 +489,13 @@ def perform_calc(elements_dict,calc_type):
         grams = make_grams_float(grams)
         answer = grams_to_moles(grams, molar_mass)
         return str(answer) + ' ' + units
+
+
+def another_calc():
+    another_calc_dec = str(input("Would you like to perform another \
+calculation on this same molecule? If so, type 'yes'; \
+otherwise, type 'quit' to quit."))
+    return another_calc_dec
 
 
 def main():

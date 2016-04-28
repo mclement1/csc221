@@ -2,6 +2,8 @@
 
 import sys
 
+import pprint
+
 from molecular_form_base_functions import (
         get_elements,
         rem_comm_spaces,
@@ -30,7 +32,8 @@ from molecular_form_base_functions import (
         make_grams_float,
         handle_not_float,
         moles_to_grams,
-        grams_to_moles
+        grams_to_moles,
+        another_calc,
 )
 
 
@@ -75,7 +78,7 @@ def func_one():
         print("I'm sorry, but you seem to have entered \
 a numerical value, invalid punctuation mark, or the empty string. \
 Please try again.")
-        print('\n')
+        #print('\n')
         elements = get_elements()
         elements_stripped = rem_comm_spaces(elements)
         alpha_only = only_alpha(elements_stripped)
@@ -112,6 +115,7 @@ a non-valid atomic symbol. Please try again.")
 
 
 def func_four():
+    #print('\n')
     numbers = get_numbers()
     numbers_stripped = rem_comm_spaces(numbers)
     num_only = only_num(numbers_stripped)
@@ -256,11 +260,35 @@ value. Please try again.")
 
 def func_twelve():
     print('\n')
-    another_calc = input("Would you like to perform another \
-calculation? If so, type 'yes'; otherwise, type 'quit' \
-to quit.")
-
-
+    another_calc_dec = another_calc()
+    cleaned_calc_dec  = rem_comm_spaces(another_calc_dec)
+    alpha_bool_value = is_alpha(cleaned__calc_dec)
+    while alpha_bool_value == False:
+        print('\n')
+        print("I'm sorry, but I did not understand that. \
+Please try again. ")
+        print('\n')
+        another_calc_dec = another_calc()
+        cleaned_calc_dec = rem_comm_spaces(another_calc_dec)
+        alpha_bool_value = is_alpha(cleaned_calc_dec)
+        continue
+    return another_calc_dec
+    form_another_calc = format_input(another_calc_dec)
+    if form_another_calc == 'quit':
+        sys.exit()
+    elif form_another_calc == 'yes':
+        continue
+    else:
+        print('\n')
+        print("I'm sorry, but I did not understand that. \
+Please try again. ")
+        print('\n')
+        another_calc_dec = another_calc()
+        cleaned_calc_dec = rem_comm_spaces(another_calc_dec)
+        alpha_bool_value = is_alpha(cleaned_calc_dec)
+        return alpha_bool_value
+        continue
+    
 
 def main():
     elements = func_one()
@@ -273,6 +301,7 @@ def main():
     molar_mass = func_eight(elements_dict, data_table)
     calc_cleaned = func_nine()
     answer = func_eleven(calc_cleaned,molar_mass)
+    print('\n')
     print(answer)
     func_twelve()
 
