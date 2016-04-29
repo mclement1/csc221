@@ -80,8 +80,8 @@ def format_input(elements):
 
 def get_numbers():
     numbers = str(input('Please list the number of each type of element \
-elements of which your molecule is composed as a comma-separated list. \
-Please list the values in the same order that you listed the elements \
+elements of which your molecule is composed as a comma-separated list.' + '\n' \
+'Please list the values in the same order that you listed the elements \
 and please only enter integers. [ex: for water, type "2,1"] \
 Type "quit" to quit. ' + '\n'))
     return numbers

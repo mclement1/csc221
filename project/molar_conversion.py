@@ -213,10 +213,10 @@ same number of integers as atomic symbols. Please try again." + '\n')
 #the numbers list
 
 def func_seven(new_elements_list, numbers_list):
-    print(new_elements_list)
-    print(numbers_list)
+    #print(new_elements_list)
+    #print(numbers_list)
     elements_dict = zip_lists(new_elements_list, numbers_list)
-    print(elements_dict)
+    #print(elements_dict)
     return elements_dict
 
 
