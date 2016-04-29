@@ -266,6 +266,7 @@ def func_ten(calc_cleaned):
         print("I'm sorry, but you have entered a non-legitimate \
 calculation type. Please try again." + '\n')
         calc_cleaned = func_nine()
+        calc_cleaned = func_nine_a(calc_cleaned)
         calc_cleaned = calc_cleaned.lower()
         len_bool_value = check_len_what_calc(calc_cleaned)
         continue
